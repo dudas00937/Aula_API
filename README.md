@@ -95,7 +95,7 @@ Validações Implementadas:
 
 •duracao_minutos: Obrigatório, número, positivo.
 
-
+- O HTML foi feito pelo MANUS/IA
 
 
 
