@@ -1,0 +1,332 @@
+{
+	"info": {
+		"_postman_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+		"name": "Aula API Música Clássica",
+		"description": "Collection para testar a API de Música Clássica com métodos GET, POST, PUT e DELETE, incluindo validações e tratamento de erros.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Geral",
+			"item": [
+				{
+					"name": "Boas-vindas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5500/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5500",
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Músicas - Listagem e Busca",
+			"item": [
+				{
+					"name": "Listar Todas as Músicas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5500/api/musicas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5500",
+							"path": [
+								"api",
+								"musicas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filtrar por Período (Barroco)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5500/api/musicas?periodo=Barroco",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5500",
+							"path": [
+								"api",
+								"musicas"
+							],
+							"query": [
+								{
+									"key": "periodo",
+									"value": "Barroco"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ordenar por Ano (Crescente)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5500/api/musicas?ordem=ano_composicao&direcao=asc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5500",
+							"path": [
+								"api",
+								"musicas"
+							],
+							"query": [
+								{
+									"key": "ordem",
+									"value": "ano_composicao"
+								},
+								{
+									"key": "direcao",
+									"value": "asc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar por ID (Sucesso)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5500/api/musicas/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5500",
+							"path": [
+								"api",
+								"musicas",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar por ID (Não Encontrado)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5500/api/musicas/999",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5500",
+							"path": [
+								"api",
+								"musicas",
+								"999"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Músicas - Criação (POST)",
+			"item": [
+				{
+					"name": "Criar Nova Obra (Sucesso)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"titulo\": \"Tocata e Fuga em Ré Menor\",\n    \"compositor\": \"Johann Sebastian Bach\",\n    \"ano_composicao\": 1704,\n    \"periodo\": \"Barroco\",\n    \"duracao_minutos\": 9\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5500/api/musicas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5500",
+							"path": [
+								"api",
+								"musicas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar Nova Obra (Erro Validação)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"titulo\": \"A\",\n    \"compositor\": \"\",\n    \"ano_composicao\": 3000,\n    \"periodo\": \"\",\n    \"duracao_minutos\": -5\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5500/api/musicas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5500",
+							"path": [
+								"api",
+								"musicas"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Músicas - Atualização (PUT)",
+			"item": [
+				{
+					"name": "Atualizar Obra (Sucesso)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"titulo\": \"Sinfonia No. 5 (Atualizada)\",\n    \"compositor\": \"Ludwig van Beethoven\",\n    \"ano_composicao\": 1808,\n    \"periodo\": \"Romântico\",\n    \"duracao_minutos\": 42\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5500/api/musicas/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5500",
+							"path": [
+								"api",
+								"musicas",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Obra (ID Inexistente)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"titulo\": \"Teste\",\n    \"compositor\": \"Teste\",\n    \"ano_composicao\": 2000,\n    \"periodo\": \"Teste\",\n    \"duracao_minutos\": 10\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5500/api/musicas/999",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5500",
+							"path": [
+								"api",
+								"musicas",
+								"999"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Músicas - Exclusão (DELETE)",
+			"item": [
+				{
+					"name": "Deletar Obra (Sucesso)",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5500/api/musicas/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5500",
+							"path": [
+								"api",
+								"musicas",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar Obra (ID Inexistente)",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5500/api/musicas/999",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5500",
+							"path": [
+								"api",
+								"musicas",
+								"999"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
